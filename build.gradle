@@ -50,17 +50,6 @@ publishing {
     }
 }
 
-//artifactory {
-//    publish {
-//        contextUrl = 'https://api.bintray.com/content/ikaros0503'
-//        repository {
-//            repoKey = "automation"
-//            username = "ikaros0503"
-//            password = "db8c19d247520a02bdebc3d6343e4bf1e468fec6"
-//        }
-//    }
-//}
-
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.5.8'
     compile gradleApi()
