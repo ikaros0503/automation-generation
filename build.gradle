@@ -1,0 +1,70 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+    // Publishing publicly
+    id 'com.gradle.plugin-publish' version '0.9.10'
+
+    // Publishing to Artifactory
+    id 'maven-publish'
+}
+
+
+project.description = 'Automation generation'
+project.group = 'com.ss'
+project.version = '1.0.0'
+project.ext.artifactId = 'automation'
+project.ext.scm = 'scm:git@github.com:Praqma/gradle-plugin-bootstrap.git'
+project.ext.url = 'https://github.com/Praqma/gradle-plugin-bootstrap'
+
+repositories {
+    mavenCentral()
+}
+
+gradlePlugin {
+    plugins {
+        greetingsPlugin {
+            id = 'automation-generation'
+            implementationClass = 'com.ss.automation.AutomationGeneration'
+        }
+    }
+}
+
+publishing {
+    publications {
+        pluginPublication(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId project.artifactId
+            version project.version
+        }
+    }
+    repositories {
+        maven {
+            url "https://api.bintray.com/content/ikaros0503/artifactory/automation/1.0.0"
+
+            credentials {
+                username "ikaros0503"
+                password "db8c19d247520a02bdebc3d6343e4bf1e468fec6"
+            }
+        }
+    }
+}
+
+//artifactory {
+//    publish {
+//        contextUrl = 'https://api.bintray.com/content/ikaros0503'
+//        repository {
+//            repoKey = "automation"
+//            username = "ikaros0503"
+//            password = "db8c19d247520a02bdebc3d6343e4bf1e468fec6"
+//        }
+//    }
+//}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.5.8'
+    compile gradleApi()
+    compile localGroovy()
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
