@@ -23,13 +23,17 @@ class AutomationGeneration implements Plugin<Project> {
 
 
         def configSigning = configJson.signingConfig
+        println "Force Signing: ${configSigning.force}"
 
-        project.android.signingConfigs {
-            automation {
-                storeFile project.file(configSigning.storeFile)
-                storePassword configSigning.storePassword
-                keyAlias = configSigning.keyAlias
-                keyPassword configSigning.keyPassword
+        if (!project.android.signingConfigs.hasProperty('automation') || configSigning.force) {
+            println "SigningConfig: ${configSigning}"
+            project.android.signingConfigs {
+                automation {
+                    storeFile project.file(configSigning.storeFile)
+                    storePassword configSigning.storePassword
+                    keyAlias = configSigning.keyAlias
+                    keyPassword configSigning.keyPassword
+                }
             }
         }
 

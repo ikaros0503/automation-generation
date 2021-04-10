@@ -11,7 +11,7 @@ plugins {
 
 project.description = 'Automation generation'
 project.group = 'com.ss'
-project.version = '1.0.0'
+project.version = '1.1.1'
 project.ext.artifactId = 'automation'
 project.ext.scm = 'scm:git@github.com:Praqma/gradle-plugin-bootstrap.git'
 project.ext.url = 'https://github.com/Praqma/gradle-plugin-bootstrap'
@@ -40,7 +40,7 @@ publishing {
     }
     repositories {
         maven {
-            url "https://api.bintray.com/content/ikaros0503/artifactory/automation/1.0.0"
+            url "https://api.bintray.com/content/ikaros0503/artifactory/automation/$project.version"
 
             credentials {
                 username "ikaros0503"
